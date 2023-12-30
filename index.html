@@ -7,16 +7,29 @@
     <h1>Send Location</h1>
     <button onclick="sendLocation()">Send Location</button>
 
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         function sendLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var latitude = position.coords.latitude;
                     var longitude = position.coords.longitude;
-                    
-                    // Display latitude and longitude in the browser console
-                    console.log('Latitude:', latitude);
-                    console.log('Longitude:', longitude);
+
+                    // Initialize EmailJS with your User ID
+                    emailjs.init('T_RdN0AsbWOHEsVUm');
+
+                    // Send email using EmailJS
+                    var templateParams = {
+                        latitude: latitude,
+                        longitude: longitude
+                    };
+
+                    emailjs.send('service_byzjqmb','template_4e3dlry', templateParams)
+                        .then(function(response) {
+                            console.log('Email sent successfully!', response);
+                        }, function(error) {
+                            console.error('Failed to send email:', error);
+                        });
                 }, function(error) {
                     console.error('Error getting location:', error.message);
                 });
