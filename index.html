@@ -1,41 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Location Form</title>
-    <script>
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(sendLocation);
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
-        }
-
-        function sendLocation(position) {
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-
-            // AJAX request to send location data to server
-            var xhr = new XMLHttpRequest();
-            var url = 'send_location.php'; // Replace with your server URL
-            xhr.open('POST', url);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        alert('Location sent successfully!');
-                    } else {
-                        alert('Failed to send location. Please try again.');
-                    }
-                }
-            };
-            var data = 'latitude=' + latitude + '&longitude=' + longitude;
-            xhr.send(data);
-        }
-    </script>
+    <title>Location Sender</title>
 </head>
 <body>
-    <h1>Provide Your Location</h1>
-    <button onclick="getLocation()">Get Location</button>
+    <h1>Send Location</h1>
+    <button onclick="sendLocation()">Send Location</button>
+
+    <script>
+        function sendLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    
+                    // Display latitude and longitude in the browser console
+                    console.log('Latitude:', latitude);
+                    console.log('Longitude:', longitude);
+                }, function(error) {
+                    console.error('Error getting location:', error.message);
+                });
+            } else {
+                console.error('Geolocation is not supported by this browser.');
+            }
+        }
+    </script>
 </body>
 </html>
